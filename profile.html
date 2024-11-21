@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4strid | Front End Developer</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <style>
+        @font-face {
+            font-family: 'Y2K Brutalism Typeface';
+            src: url('Y2K Brutalism Typeface.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Fakereceipt';
+            src: url('Fakereceipt.ttf') format('truetype');
+        }
+        * {
+            cursor: url('honkaicursor.png'), auto;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Fakereceipt', Arial, sans-serif; /* Default font for the body text */
+            background-image: url('blackhole.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background-color: rgba(30, 30, 30, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .logo {
+            width: 300px;
+            height: 300px;
+            background-image: url('Stardust.jpeg'); /* Replace 'your-image.png' with the path to your image */
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .content h1, .content p {
+            margin: 5px 0;
+        }
+        .title {
+            font-family: 'Y2K Brutalism Typeface', Arial, sans-serif; /* Custom font for the title */
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column; /* Arrange buttons in a column */
+            align-items: center; /* Center the buttons horizontally */
+            gap: 10px;
+        }
+        .buttons-row {
+            display: flex;
+            gap: 10px;
+        }
+        .buttons a img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.2s;
+        }
+        .buttons a img:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="logo"></header>
+        <div class="content">
+            <h1 class="title" id="main-title">4strid</h1>
+            <p id="subtitle">Welcome!!!</p>
+            <p id="additional-text">
+                He/him & They/Them<br>
+                Front End Developer<br>
+                6/18<br>
+                Discord - cyb3rly_h1gh<br>
+                Straight<br>
+                Minor<br>
+                Only DM me for coding-related stuff<br>or if we share a mutual server
+            </p>
+            <div class="buttons">
+                <div class="buttons-row">
+                    <a href="https://html.com/" target="_blank"><img src="HTML5.png" alt="Learn HTML"></a>
+                    <a href="https://www.w3schools.com/css/default.asp" target="_blank"><img src="CSS.png" alt="Learn CSS"></a>
+                    <a href="https://www.javascript.com/" target="_blank"><img src="javascript.png" alt="Learn JavaScript"></a>
+                    <a href="https://www.python.org/" target="_blank"><img src="python.png" alt="Learn Python"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background music -->
+    <audio id="background-music" autoplay loop muted>
+        <source src="background-music.mp3" type="audio/mpeg">
+        <source src="background-music.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // JavaScript for title animations
+        const tabTitles = ["MADE AND EDITED", "BY ASTRID", "^_^"];
+        const mainTitles = ["4", "4|", "4s", "4s|", "4st", "4st|", "4str", "4str|", "4stri", "4stri|", "4strid", "4strid", "4strid|", "4stri", "4str", "4st", "4s", "4", "|", "", "|"];
+        let tabTitleIndex = 0;
+        let mainTitleIndex = 0;
+
+        function changeTabTitle() {
+            document.title = tabTitles[tabTitleIndex];
+            tabTitleIndex = (tabTitleIndex + 1) % tabTitles.length;
+        }
+
+        function changeMainTitle() {
+            const mainTitleElement = document.getElementById("main-title");
+            mainTitleElement.innerText = mainTitles[mainTitleIndex];
+            mainTitleIndex = (mainTitleIndex + 1) % mainTitles.length;
+        }
+
+        setInterval(changeTabTitle, 2000);
+        setInterval(changeMainTitle, 700);
+
+        // Autoplay music handling
+        const music = document.getElementById("background-music");
+
+        // Try to unmute and play the music on page load
+        window.addEventListener("load", () => {
+            music.muted = false;
+            music.play().catch(() => {
+                console.log("Autoplay blocked. Waiting for user interaction.");
+            });
+        });
+
+        // Fallback: play music on user interaction if blocked
+        document.body.addEventListener("click", () => {
+            if (music.paused) {
+                music.muted = false;
+                music.play();
+            }
+        });
+    </script>
+</body>
+</html>
