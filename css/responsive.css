@@ -1,0 +1,150 @@
+/* ==========================================================================
+   responsive.css — warning overlay, small screens, reduced motion.
+   Desktop styling is untouched; these rules only kick in below 1024px so the
+   "proceed anyway" path is actually usable.
+   ========================================================================== */
+
+/* Mobile / Unsupported Device Warning Overlay */
+#mobile-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background: rgba(5, 5, 5, 0.96);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    color: var(--text-main);
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem;
+}
+
+.warning-box {
+    max-width: 420px;
+    background: rgba(12, 12, 12, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-main);
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.warning-box h2 {
+    font-size: 1.2rem;
+    font-weight: normal;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+}
+
+.warning-box p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.warning-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-main);
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    border-radius: var(--radius-card);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.warning-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--text-main);
+}
+
+/* ---------- small screens: let the page scroll instead of clipping ---------- */
+@media (max-width: 1024px) {
+    body {
+        align-items: flex-start;
+        height: auto;
+        min-height: 100dvh;
+        overflow: auto;
+        padding: 1.25rem 0;
+    }
+
+    #main-container {
+        aspect-ratio: auto;
+        height: auto;
+        max-height: none;
+        min-height: 0;
+        width: min(880px, 92vw);
+        padding: 1.6rem;
+    }
+
+    .home-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 1.4rem;
+    }
+
+    .stack-container {
+        min-height: 11rem;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .page-content.centered {
+        height: auto;
+        padding: 2rem 0;
+    }
+}
+
+@media (max-width: 520px) {
+    #main-container {
+        width: 94vw;
+        padding: 1.25rem;
+    }
+
+    nav {
+        gap: 1rem;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    nav button {
+        font-size: 0.95rem;
+        white-space: nowrap;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    .profile-header {
+        gap: 0.85rem;
+    }
+}
+
+/* ---------- respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .grid-bg {
+        animation: none;
+    }
+
+    .page.active {
+        animation: none;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

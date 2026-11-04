@@ -1,0 +1,59 @@
+/* ==========================================================================
+   tokens.css — design tokens and reset.
+   Change colours, radii and fonts here only; everything else reads these.
+   ========================================================================== */
+
+:root {
+    /* palette */
+    --bg-color: #050505;
+    --card-bg: #0c0c0c;
+    --border-color: #1c1c1c;
+    --text-main: #e8e8e8;
+    --text-muted: #808080;
+    --accent: #ffffff;
+
+    /* radii */
+    --radius-main: 12px;
+    --radius-card: 6px;
+
+    /* type */
+    --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+    --font-caption: 0.72rem;
+
+    /* discord presence colours */
+    --status-offline: #747f8d;
+    --status-online: #3ba55d;
+    --status-idle: #faa61a;
+    --status-dnd: #ed4245;
+
+    /* background grid */
+    --grid-size: 50px;
+    --grid-line: rgba(255, 255, 255, 0.03);
+
+    /* motion */
+    --ease-out: cubic-bezier(0.25, 1, 0.3, 1);
+
+    color-scheme: dark;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-mono);
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+/* one visible, consistent focus style for keyboard users only */
+:focus-visible {
+    outline: 1px dashed rgba(255, 255, 255, 0.35);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--text-main);
+    color: var(--bg-color);
+}

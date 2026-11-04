@@ -1,0 +1,329 @@
+/* ==========================================================================
+   components.css — nav, panels, profile, activity stack, spotify, contact.
+   ========================================================================== */
+
+/* Terminal-Style Navigation */
+nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    padding-bottom: 1rem;
+    flex-shrink: 0;
+}
+
+nav button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    cursor: pointer;
+    text-transform: lowercase;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+nav button:hover {
+    color: var(--text-main);
+}
+
+nav button.active {
+    color: var(--accent);
+    letter-spacing: 0.5px;
+}
+
+nav button.active::before {
+    content: '[';
+    color: var(--text-muted);
+    margin-right: 0.4rem;
+    transition: all 0.4s ease;
+}
+
+nav button.active::after {
+    content: ']';
+    color: var(--text-muted);
+    margin-left: 0.4rem;
+    transition: all 0.4s ease;
+}
+
+/* Panels */
+.panel {
+    background-color: rgba(12, 12, 12, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 1.5rem;
+    font-size: 0.95rem;
+    border-radius: var(--radius-card);
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.5s ease;
+}
+
+.panel:hover {
+    background-color: rgba(15, 15, 15, 0.8);
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    height: 100%;
+    transition: grid-template-columns 0.6s ease;
+}
+
+.home-grid.centered {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.home-grid.centered .panel {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Profile Details */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+}
+
+.avatar-container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 4rem;
+    height: 4rem;
+    background-color: #111;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid var(--card-bg);
+    background-color: var(--status-offline);
+}
+
+.status-online { background-color: var(--status-online); }
+.status-idle { background-color: var(--status-idle); }
+.status-dnd { background-color: var(--status-dnd); }
+
+.bio {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+.bio img.emoji {
+    width: 1.2rem;
+    height: 1.2rem;
+    vertical-align: middle;
+    margin-right: 0.4rem;
+}
+
+/* Activity Stack */
+.stack-container {
+    position: relative;
+    height: 100%;
+    perspective: 1000px;
+}
+
+.stack-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+    position: absolute;
+    top: -1.8rem;
+}
+
+.stack-container:focus-visible {
+    outline-offset: 6px;
+}
+
+/* Smaller Activity Card Box */
+.activity-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(12, 12, 12, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-card);
+    padding: 1.1rem;
+    transition: all 0.6s var(--ease-out);
+    cursor: ns-resize;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.activity-card.active {
+    transform: translateY(0) scale(1);
+    z-index: 3;
+    opacity: 1;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+}
+
+.activity-card.next {
+    transform: translateY(1rem) scale(0.95);
+    z-index: 2;
+    opacity: 0.5;
+    filter: brightness(0.5);
+}
+
+.activity-type {
+    font-size: var(--font-caption);
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+}
+
+.activity-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.activity-icon {
+    width: 3rem;
+    height: 3rem;
+    background-color: #111;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.activity-details {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    width: 100%;
+}
+
+.activity-details h3 {
+    font-size: 0.98rem;
+    color: var(--accent);
+}
+
+.activity-details p {
+    font-size: 0.82rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* muted text lines inside a card (was inline styles before) */
+.activity-line {
+    color: var(--text-muted);
+}
+
+.activity-line.sub {
+    font-size: 0.82rem;
+}
+
+/* Spotify Specific Styles with Lyrics & Progress */
+.spotify-progress-container {
+    margin-top: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--font-caption);
+    color: var(--text-muted);
+    width: 100%;
+}
+
+.spotify-progress-bar {
+    flex-grow: 1;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.spotify-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--accent);
+    width: 0%;
+}
+
+.spotify-lyrics {
+    margin-top: 0.8rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.06);
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.spotify-lyrics .highlight {
+    color: var(--accent);
+    font-weight: 500;
+}
+
+/* Contact Grid */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    height: 100%;
+}
+
+.contact-card {
+    background-color: rgba(12, 12, 12, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    transition: all 0.5s ease;
+}
+
+.contact-card:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    transform: translateX(4px);
+}
+
+.contact-card svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    fill: var(--text-muted);
+    flex-shrink: 0;
+    transition: fill 0.5s ease;
+}
+
+.contact-card:hover svg {
+    fill: var(--text-main);
+}
+
+.contact-card span {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

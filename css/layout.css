@@ -1,0 +1,116 @@
+/* ==========================================================================
+   layout.css — viewport frame, animated grid, main container, page switching.
+   ========================================================================== */
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+}
+
+/* Infinite Scrolling Grid Background */
+.grid-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    background-color: var(--bg-color);
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    animation: scrollGrid 15s linear infinite;
+}
+
+@keyframes scrollGrid {
+    0% { background-position: 0px 0px; }
+    100% { background-position: var(--grid-size) calc(var(--grid-size) * -1); }
+}
+
+/* COMPACT & SPACED CONTAINER */
+#main-container {
+    position: relative;
+    z-index: 3;
+    aspect-ratio: 16 / 9;
+    width: 850px;
+    max-width: 85vw;
+    max-height: 70vh;
+    background-color: rgba(8, 8, 8, 0.75);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 2.2rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius-main);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Calmer, Slower Page Transitions */
+@keyframes fadeInSlide {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+        filter: blur(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.page {
+    display: none;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 1.2rem;
+    /* scrolls instead of clipping when the viewport is short */
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.page.active {
+    display: flex;
+    animation: fadeInSlide 0.8s var(--ease-out) forwards;
+}
+
+h1 {
+    font-size: 2.2rem;
+    font-weight: normal;
+    line-height: 1.1;
+    color: var(--accent);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+/* Direct Floating Content Styling for About & Projects */
+.page-content {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-top: 0.5rem;
+}
+
+.page-content.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--text-muted);
+}
